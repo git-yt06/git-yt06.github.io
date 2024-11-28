@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>シナリオ型情報教材</title>
+    <link rel="stylesheet" href="story-style.css">
+</head>
+<body>
+
+    <div class="content">
+        <div class="image-area">
+            <img src="content.png" alt="説明画像">
+        </div>
+        <div class="choices-area">
+            <button id="goQ">問題へ！</button>
+
+            <button id="choice1">選択肢 1</button>
+            <button id="choice2">選択肢 2</button>
+            <button id="choice3">選択肢 3</button>
+            <button id="choice4">選択肢 4</button><br>
+            <button class="submit-button" id="submit">決定</button>
+        </div>
+    </div>
+
+    <div class="chat-window">
+        <div class="character-image">
+            <img src="character.png" alt="キャラクター画像">
+        </div>
+        <div class="messages">
+            <div class="character"></div>
+            <div class="text">
+                <div id="dialogue"></div>
+                <div id="comment" style='color: pink'></div>
+            </div>
+        </div>
+        <div class="button-group">
+            <button class="menu-button" id="menu">画像一覧</button>
+            <div class="nav-buttons">
+                <button id="prev">戻る</button>
+                <button id="next">次へ</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="story-script.js"></script>
+</body>
+</html>
