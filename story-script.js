@@ -815,7 +815,7 @@ document.getElementById('prev').addEventListener('click', () => {
 });
 
 document.getElementById('menu').addEventListener('click', () => {
-    window.open("index.html", '_blank'); // 新しいタブでURLを開く   
+    window.open("gallery.html", '_blank'); // 新しいタブでURLを開く   
 });
 
 // 初期ダイアログの設定
