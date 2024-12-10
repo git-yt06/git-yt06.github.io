@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>年収の壁問題</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="grid-container">
+            <h1>解答欄</h1>
+            <div id="grid" class="grid">
+                <div class="cell" data-index="0">-</div>
+                <div class="cell" data-index="1">-</div>
+                <div class="cell" data-index="2">-</div>
+                <div class="cell" data-index="3">-</div>
+                <div class="cell" data-index="4">-</div>
+                <div class="cell" data-index="5">-</div>
+            </div>
+        </div>
+        <div class="grid-container">
+            <h1>選択肢</h1>
+            <div id="options" class="grid">
+                <div class="option" data-value=0>iを1から11まで1ずつ増やしながら<br>｜　kanri ← kanri - ???<br>を繰り返す</div>
+                <div class="option" data-value=3>time ← time+1</div>
+                <div class="option" data-value=1>kanri ← kanri - ???</div>
+                <div class="option" data-value=4>kanri ≧ 0 の間</div>
+                <div class="option" data-value=5>を繰り返す</div>
+                <div class="option" data-value=2>???と「時間」を表示する</div><br>
+                <div class="option" data-value=-1>(選択肢を外す用)</div>
+            </div>
+        </div>
+
+        <div class="resultArea" style="font-size:large">
+            <div id="quiz">
+                <div style="font-size: larger;font-weight: bolder;">問題</div>
+                ・リストSyunyuに先頭から順に1~11月分の月給(円)が入っている<br>
+                ・12月は年収が100万円以下になるよう働きたい<br>
+                ※11月までの収入の合計が100万円未満であることは保証される<br>
+                ・時給は 変数jikyu (円)である<br>
+                ・time(初期値0), kanri(初期値100万), jikyuは予め宣言されている<br>
+                ・年収が100万円を超えないように働ける最大の時間を表示せよ<br>
+                ・例：jikyuが1000、Syunyuの合計が98万9000のとき、<br>
+                　　出力は11時間となる(下の実行結果もこの条件である)
+            </div>
+            <div class="button-container"><button id="checkAnswers"> 実行！ </button></div>
+            <div id="results">
+                <h2>実行結果:</h2>
+                <!--<pre id="modals"></pre>
+                <pre id="cells"></pre>-->
+                <pre id="code"></pre>
+                <pre id="executionResult"></pre>
+            </div>
+            <div id="commentArea">
+                <h2>フィードバック:</h2>
+                <div id="comment">解き方は無数にあるが、選択肢的に1択に絞られるからそれに合わせる力が問われるな。</div>
+            </div>
+            <div class="button-container"><button id="menuButton">画像一覧</button><button id="closeButton"> ストーリーに戻る </button></div>
+        </div>
+    </div>
+
+    <div id="myModal1" class="modal">
+        <div class="modal-content">
+            <h2>選択肢を選んでください</h2>
+            <div class="modal-option" data-value="A">Syunyu[i]</div>
+            <div class="modal-option" data-value="B">Syunyu[i+1]</div>
+            <div class="modal-option" data-value="C">Syunyu[i-1]</div>
+            <div class="modal-option" data-value="D">Syunyu[i]+1</div>
+        </div>
+    </div>
+
+    <div id="myModal2" class="modal">
+        <div class="modal-content">
+            <h2>選択肢を選んでください</h2>
+            <div class="modal-option" data-value="A">jikyu</div>
+            <div class="modal-option" data-value="B">"jikyu"</div>
+            <div class="modal-option" data-value="C">1000</div>
+        </div>
+    </div>
+
+    <div id="myModal3" class="modal">
+        <div class="modal-content">
+            <h2>選択肢を選んでください</h2>
+            <div class="modal-option" data-value="A">time</div>
+            <div class="modal-option" data-value="B">time+1</div>
+            <div class="modal-option" data-value="C">time-1</div>
+            <div class="modal-option" data-value="D">"time"</div>
+        </div>
+    </div>
+    <script src="s.js"></script>
+</body>
+</html>
