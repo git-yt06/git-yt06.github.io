@@ -206,14 +206,17 @@ function displaySelectedOptions() {
                 break;
             }
         }
-        if (b) {document.getElementById('comment').innerHTML = `正解だ。これは難しいと思うから解けたことに自信をもってくれ。じゃあ、ストーリーに戻ろうか。`}
+        if (b) {document.getElementById('comment').innerHTML = `正解だ。二重ループもバッチリだな。ストーリーに戻ろうか。`}
         else {
-            document.getElementById('comment').innerHTML =
-            `最後の繰返し終了の選択肢の順番だけ間違っているっぽいな。<br>
-            最後に始めた繰返し文を先に閉じないと本来は誤りだ。`;
+            if(cellSelections[0]=="2") document.getElementById('comment').innerHTML =
+            `numが1ずつ増加ではなく、1,11,21,2,12,22...みたいに増えてないか？<br>
+            もしそうならfor文の順番を見直してみよう。`;
+            else document.getElementById('comment').innerHTML =
+            `最後の繰返し終了の選択肢の順番や実行するの位置だけ間違っているっぽいな。<br>
+            出力が合っていても、本来は致命的なミスになっているかもしれないぞ。`;
         }
     } catch (e) {
-        document.getElementById('executionResult').textContent = 'エラーが発生しているよ！ ' + e;
+        document.getElementById('executionResult').innerHTML = 'エラーが発生しているよ！<br>機械が出すエラー文…' + e;
         document.getElementById('comment').innerHTML =
         `構文の作り方が間違っているみたいだ。<br>繰り返し文や条件文の並び方を確認してみよう。`;
     }
