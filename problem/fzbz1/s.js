@@ -190,7 +190,9 @@ function displaySelectedOptions() {
         if (modalSelections[0]!='C' || modalSelections[1]!='C' || modalSelections[2]!='A'){
             document.getElementById('comment').innerHTML = `条件文と出力のペアがあってないところがあるみたいだ。<br>
             問題文と今の解答をよく見て、思い描いたアルゴリズムと違うところを探してみよう。<br>
-            ???に入れる選択肢を変えるには、1回その選択肢を外してくれ。`
+            ???に入れる選択肢を変えるには、1回その選択肢を外してくれ。<br>
+            もし、明らかに合っているのにこのメッセージが出る場合は、<br>
+            悪いが一度、fzを表示する選択肢を入れ直してみてくれ。こちらのミスかもしれない。`
             return;
         }
         if (pnum != 30) {
