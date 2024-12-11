@@ -170,7 +170,7 @@ function displaySelectedOptions() {
         else code += dic[e];
     }
     code += `result;`;
-    document.getElementById('code').textContent = code;
+    //document.getElementById('code').textContent = code;
 
     try {
         const execution = eval(code);
