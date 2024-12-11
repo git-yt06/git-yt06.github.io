@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>年金問題</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="grid-container">
+            <h1>解答欄</h1>
+            <div id="grid" class="grid">
+                <div class="cell" data-index=0>-</div>
+                <div class="cell" data-index=1>-</div>
+                <div class="cell" data-index=2>-</div>
+                <div class="cell" data-index=3>-</div>
+                <div class="cell" data-index=4>-</div>
+                <div class="cell" data-index=5>-</div>
+                <div class="cell" data-index=6>-</div>
+                <div class="cell" data-index=7>-</div>
+            </div>
+        </div>
+        <div class="grid-container">
+            <h1>選択肢</h1>
+            <div id="options" class="grid">
+                <div class="option" data-value=3>toku ← -400000, year ← 65<br>en ← 38195<br>//64才時点での39000円の価値</div>
+                <div class="option" data-value=4>toku＜0 の間</div>
+                <div class="option" data-value=5>を繰り返す</div>
+                <div class="option" data-value=0>もし ??? ならば</div>
+                <div class="option" data-value=6>を実行する</div>
+                <div class="option" data-value=1>???を表示する</div>
+                <div class="option" data-value=2>en ← ???</div>
+                <div class="option" data-value=7>year ← year+1<br>toku ← toku+en</div><br>
+                <div class="option" data-value=-1>(選択肢を外す用)</div>
+            </div>
+        </div>
+
+        <div class="resultArea" style="font-size:large">
+            <div id="quiz">
+                <div style="font-size: larger;font-weight: bolder;">問題</div>
+                ・選択肢を並び替えて、花子さんの作ったコードを作りなさい<br>
+                太郎：学生納付特例で年金保険料を2年間払わなかったから、40万円得したわ。<br>
+                花子：でも、その分65才から貰える年金は減るから得したとは言い切れないんじゃない？<br>
+                太郎：…確かに。じゃあ追納した方が良いのかな。何才のときに元を取れるの？<br>
+                花子：40万円は損する代わりに、1年につき39000円増えるから…75才(4ヶ月目)かな。
+                    調べれば1発だけど、せっかくだから練習としてプログラムを作って求めてみよう。<br>
+                太郎：最近物価高だし、円の価値は5年毎に実質的に3%ずつ減っていくことにしよう。
+                    65~69才のときは1万円貰っても実質的に9500円の得ってことにして、
+                    70~74才は9500*0.97=9215円(少数切り上げ)…って感じね。<br>
+                花子：となると、コードはこうなるわね！<br>
+                太郎：出力結果は76 (才)か。微妙だね。生きてる保障もないし…<br>
+                花子：必ず得できるなら保険側が破綻するし仕方ないわね。 
+            </div>
+            <div class="button-container"><button id="checkAnswers"> 実行！ </button></div>
+            <div id="results">
+                <h2>実行結果:</h2>
+                <!--<pre id="modals"></pre>
+                <pre id="cells"></pre>-->
+                <pre id="code"></pre>
+                <pre id="executionResult"></pre>
+            </div>
+            <div id="commentArea">
+                <h2>フィードバック:</h2>
+                <div id="comment">問題を理解して、アルゴリズムのイメージを先に思い浮かべよう。<br>
+                選択肢的に、まず変数を宣言して、tokuがプラスになるまで実質的な年金の価値を足していく方針だぞ。</div>
+            </div>
+            <div class="button-container"><button id="menuButton">画像一覧</button><button id="closeButton"> ストーリーに戻る </button></div>
+        </div>
+    </div>
+
+    <div id="myModal1" class="modal">
+        <div class="modal-content">
+            <h2>選択肢を選んでください</h2>
+            <div class="modal-option" data-value="A">year=5</div>
+            <div class="modal-option" data-value="B">year/5=1</div>
+            <div class="modal-option" data-value="C">year%5=0</div>
+            <div class="modal-option" data-value="D">year%5≠0</div>
+        </div>
+    </div>
+    <div id="myModal2" class="modal">
+        <div class="modal-content">
+            <h2>選択肢を選んでください</h2>
+            <div class="modal-option" data-value="A">year</div>
+            <div class="modal-option" data-value="B">year+1</div>
+            <div class="modal-option" data-value="C">year-1</div>
+            <div class="modal-option" data-value="D">"year"</div>
+        </div>
+    </div>
+    <div id="myModal3" class="modal">
+        <div class="modal-content">
+            <h2>選択肢を選んでください</h2>
+            <div class="modal-option" data-value="A">en</div>
+            <div class="modal-option" data-value="B">en÷1.03</div>
+            <div class="modal-option" data-value="C">en - en X 3 ÷100</div>
+        </div>
+    </div>
+    <script src="s.js"></script>
+</body>
+</html>
