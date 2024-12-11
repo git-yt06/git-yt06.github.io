@@ -37,7 +37,7 @@ image2.forEach(src => {
 });
 
 let image3=[];
-for (let i=1;i<=1;++i){
+for (let i=1;i<=3;++i){
     let path=`image/正解${i}.JPG`;
     image3.push(path);
     path=`image/間違い${i}.JPG`;
