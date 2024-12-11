@@ -2,7 +2,7 @@ let selectedCell = null;
 let cellOptionMap = new Map();
 
 let modalSelections = ["0","0","0"];
-let cellSelections = ["-1","-1","-1","-1","-1","-1","-1","-1","-1"];
+let cellSelections = [-1,-1,-1,-1,-1,-1];
 
 let text;
 
@@ -44,9 +44,9 @@ async function handleOptionClick(option) {
             previousOption.style.visibility = 'visible';
         }
 
-        text = option.textContent; // innerHTMLを使用して改行を保持
+        text = option.textContent;
 
-        if (option.dataset.value == "-1") {
+        if (option.dataset.value == -1) {
             // 初期状態に戻す処理
             selectedCell.innerHTML = '-'; // セルの内容をクリア
             cellOptionMap.delete(selectedCell); // マップからも削除
@@ -55,17 +55,17 @@ async function handleOptionClick(option) {
             option.style.visibility = 'visible'; // オプションは再度選択可能に
         }
         else {
-            if (option.dataset.value == "4") {
-                text = "もし (num % 15 == 0) ならば <br>　|　{ ";
-                await showModal(modal2, option);
-                text += " }<br>を実行し、そうでなければ";
-            } else if (option.dataset.value == "5" || option.dataset.value == "10") {
-                text = "もし ( ";
-                await showModal(modal3, option);
-            } else if (option.dataset.value == "6") {
-                text = "もし (";
+            if (option.dataset.value == 0) {
+                text = "iを1から11まで1ずつ増やしながら<br>｜　kanri ← kanri - ";
                 await showModal(modal1, option);
-                text += ") ならば <br>　|　{ 'bz 'を表示する; }<br>を実行し、そうでなければ <br>　|　{ numと' '(空白)を表示する }<br>を実行する";
+                text += "<br>を繰り返す";
+            } else if (option.dataset.value == 1) {
+                text = "kanri ← kanri - ";
+                await showModal(modal2, option);
+            } else if (option.dataset.value == 2) {
+                text = "";
+                await showModal(modal3, option);
+                text += "と「時間」を表示する";
             }
             selectedCell.innerHTML = text;
             cellOptionMap.set(selectedCell, option);
@@ -79,19 +79,9 @@ async function handleOptionClick(option) {
 // モーダルの選択肢がクリックされた際の処理
 function handleModalOptionClick(e, option) {
     const selectedValue = e.target.textContent;
-    const splitValue = selectedValue.split(',');  // カンマで分割
-    let ix = parseInt(option.dataset.value) - 4;
-
-    if (splitValue.length === 2) {
-        text += splitValue[0].trim() + ") ならば <br>　|　{ " + splitValue[1].trim();
-        if (ix == 6) {
-            ix = 1;
-            text += " }<br> を実行する";
-        }
-        else text += " }<br> を実行し、そうでなければ";
-    } else {
-        text += selectedValue.trim();
-    }
+    let ix = parseInt(option.dataset.value);
+    
+    text += selectedValue.trim();
 
     modalSelections[ix] = e.target.getAttribute('data-value');
     closeModal();
@@ -127,15 +117,10 @@ function closeModal() {
 
 // 選択されたオプションを表示
 let dic = {
-    "1":"for (let i = 0; i <= 2; ++i) {",
-    "2":"for (let j = 1; j <= 10; ++j) {",
-    "3":"let num = i * 10 + j;",
-    "8":"}",
-    "7":"result += '<br>';}",
-    "9":"}"
+    3:"++time;",
+    4:"while(m >= 0) {if(++p>100){result = '-1'; break; }",
+    5:"}",
 };
-
-let ok = ["1", "2", "3", "4", "5", "6", "9", "9", "8", "7"];
 
 function displaySelectedOptions() {
     let modals = "";
@@ -149,74 +134,78 @@ function displaySelectedOptions() {
 
     //let resultText = '選択されたオプション:\n';
     //document.getElementById('result').textContent = resultText;
-    let code = `let result = ''; let p = 0;`;
+    let code = `let result=""; let m=1000000, time=0, jikyu=1000, p=0; let L = [90000,90000,90000,90000,90000,90000,90000,90000,90000,90000,89000];`;
     for (const e of cellSelections) {
-        if (e == "-1") {
-            document.getElementById('executionResult').textContent = '解答欄が埋まっていないよ';
-            document.getElementById('comment').innerHTML = `まずは解答欄を全部埋めてみよう。3かつ5の倍数、すなわち15の倍数での条件分けの選択肢があるからそこを起点に考えると良いぞ。`;
+        if (e == -1) {
+            document.getElementById('executionResult').innerHTML = '解答欄が埋まっていないよ';
+            document.getElementById('comment').innerHTML = `まずは解答欄を全部埋めてみよう。<br>kanriが上限額の100万を表しているから、まずはこれを11月までの収入分引いてみよう。`;
             return;
         }
-        if (e == "4") {
-            code += "if (num % 15 == 0) { result += ";
-            if (modalSelections[0]=="A") code+="'fz ';";
-            if (modalSelections[0]=="B") code+="'bz ';";
-            if (modalSelections[0]=="C") code+="'FB ';";
-            code+=" ++p; } else { ";
+        if (e == 0) {
+            if (modalSelections[0]=="C") code+="m -= 989000;";
+            else {
+                document.getElementById('executionResult').innerHTML = `エラーが発生しているよ！<br>エラー：リストSyunyuの範囲外の参照`;
+                document.getElementById('comment').innerHTML = `リスト(配列)の範囲は0~(リストの大きさ-1)だったな。<br>
+                今回は添え字に関するiが、1から始まってリストの大きさまでを動くから…`
+                return;
+            }
         }
-        else if (e == "5" || e == "10") {
-            if (modalSelections[1]=="A") code+="if (num % 3 == 0) { result += 'fz ';";
-            if (modalSelections[1]=="B") code+="if (num % 3 == 0) { result += 'FB ';";
-            if (modalSelections[1]=="C") code+="if (num % 5 == 0) { result += 'fz ';";
-            if (modalSelections[1]=="D") code+="if (num % 5 == 0) { result += 'FB ';";
-            code += "++p;"
-            if (e == "5") code+="} else {";
+        else if (e == 1) {
+            if (modalSelections[1]=="A") code+="m -= jikyu;";
+            if (modalSelections[1]=="B") {
+                document.getElementById('executionResult').innerHTML = `エラーが発生しているよ！<br>エラー：数字-文字列`;
+                document.getElementById('comment').innerHTML = `kanriは数字、'jikyu'は文字列だ。数字-文字列はできないぞ。`
+                return;
+            }
+            if (modalSelections[1]=="C") code+="m -= 1000;";
         }
-        else if (e == "6") {
-            if (modalSelections[2]=="A") code+="if (num % 3 == 0) ";
-            if (modalSelections[2]=="B") code+="if (num % 5 == 0) ";
-            if (modalSelections[2]=="C") code+="if (num % 3 != 0) ";
-            if (modalSelections[2]=="D") code+="if (num % 5 != 0) ";
-            code+="{ result += 'bz '; ++p; } else { result += num + ' '; ++p; }";
+        else if (e == 2) {
+            code+="if(result!='-1')"
+            if (modalSelections[2]=="A") code+="result += time + '<br>';";
+            if (modalSelections[2]=="B") code+="result += time+1 + '<br>';";
+            if (modalSelections[2]=="C") code+="result += time-1 + '<br>';";
+            if (modalSelections[2]=="D") {
+                document.getElementById('executionResult').textContent = 'time';
+                document.getElementById('comment').innerHTML = `出力がtimeという文字列で固定されているな。<br>
+                timeの中身を表示するようにまずは修正しよう。`
+                return;
+            }
         }
         else code += dic[e];
     }
-    code += `result = p.toString() + "/" + result; result; `;
+    code += `result;`;
     //document.getElementById('code').textContent = code;
+
     try {
-        const execution = eval(code); // JavaScriptで実行結果を表示
-        let exList = execution.split("/");
-        let pnum = exList[0];
-        document.getElementById('executionResult').innerHTML = exList[1];
-        if (modalSelections[0]!='C' || modalSelections[1]!='C' || modalSelections[2]!='A'){
-            document.getElementById('comment').innerHTML = `条件文と出力のペアがあってないところがあるみたいだ。<br>
-            問題文と今の解答をよく見て、思い描いたアルゴリズムと違うところを探してみよう。<br>
-            ???に入れる選択肢を変えるには、1回その選択肢を外してくれ。`
+        const execution = eval(code);
+        document.getElementById('executionResult').innerHTML = execution;
+        if(execution=="-1") {
+            document.getElementById('executionResult').innerHTML = `エラーが発生しているよ！<br>エラー：無限ループ`;
+            document.getElementById('comment').innerHTML = `while文で無限ループが起きているみたいだ。<br>
+            kanriが条件になっているから、ループの中でkanriを変更しないと無限ループが起きるぞ。見直してみよう。`;
             return;
         }
-        if (pnum != 30) {
-            document.getElementById('comment').innerHTML =
-            `出力が30回でないみたいだ。どの数字で余計な出力か出ているかをまず確認し、
-            残っている選択肢と今の解答をよく見て、思い描いたアルゴリズムと違うところを探してみよう。`;
+
+        if (modalSelections[1]=='C'){
+            document.getElementById('comment').innerHTML = `出力例のjikyuは1000だけど、<br>
+            求めるプログラムのjikyuの中身は1000固定ではなく、予め宣言した値を使うぞ。<br>
+            kanriから時給を引くときはjikyuを使おう。`
             return;
         }
-        let b=true;
-        for (let i=0;i<10;++i){
-            if (cellSelections[i]!=ok[i]){
-                b=false;
-                break;
+        if (cellSelections[0]==0 && cellSelections[1]==4 && cellSelections[4]==5 && cellSelections[5]==2){
+            if (modalSelections[2]=="C") document.getElementById('comment').innerHTML = `正解だ。よく選択肢に合わせられたな。ストーリーに戻ろう。`
+            else {
+                document.getElementById('comment').innerHTML = `惜しいな。アルゴリズム的に収入が100万を超える時間働いたら<br>
+                ループが終了するから、出力するときにはtimeを…`
             }
         }
-        if (b) {document.getElementById('comment').innerHTML = `正解だ。二重ループもバッチリだな。ストーリーに戻ろうか。`}
         else {
-            if(cellSelections[0]=="2") document.getElementById('comment').innerHTML =
-            `numが1ずつ増加ではなく、1,11,21,2,12,22...みたいに増えてないか？<br>
-            もしそうならfor文の順番を見直してみよう。`;
-            else document.getElementById('comment').innerHTML =
-            `最後の繰返し終了の選択肢の順番や実行するの位置だけ間違っているっぽいな。<br>
-            出力が合っていても、本来は致命的なミスになっているかもしれないぞ。`;
+            document.getElementById('comment').innerHTML = `構文の作り方は問題ないが、純粋に並び替え結果が違うみたいだ。<br>
+            実行結果を見て、もう一度アルゴリズムを見直してみよう。<br>
+            while文に入れるべきものと、そうでないものを意識すると良いぞ。`
         }
     } catch (e) {
-        document.getElementById('executionResult').innerHTML = 'エラーが発生しているよ！<br>機械が出すエラー文…' + e;
+        document.getElementById('executionResult').textContent = 'エラーが発生しているよ！ ' + e;
         document.getElementById('comment').innerHTML =
         `構文の作り方が間違っているみたいだ。<br>繰り返し文や条件文の並び方を確認してみよう。`;
     }
