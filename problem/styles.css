@@ -9,7 +9,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 30%;
+    width: 27%;
 }
 
 .grid {
@@ -76,7 +76,7 @@
 .resultArea {
     justify-content: start;
     align-items: flex-start;
-    width: 40%;
+    width: 45%;
     height: 100%;
     gap: 10px;
     border: 1px solid black; /* resultAreaに枠線を追加 */
@@ -88,14 +88,6 @@
     border: 1px solid black; /* quizに枠線を追加 */
     overflow-y: auto; /* シークバーを表示 */
     padding: 5px; /* 内容が枠線にくっつかないようにパディングを追加 */
-}
-
-#checkAnswers {
-    height: auto;
-    width: 100%;
-    border: 1px solid black; /* checkAnswersに枠線を追加 */
-    padding: 5px;
-    cursor: pointer;
 }
 
 #results {
@@ -113,12 +105,35 @@
     overflow-y: auto; /* シークバーを表示 */
 }
 
-#closeButton {
+.button-container {
+    display: flex;
+    justify-content: center;
     align-items: center;
-    height: auto;
-    width: 100%;
-    border: 1px solid black; /* nextボタンに枠線を追加 */
-    margin-top: 20px;
-    cursor: pointer;
+    border: 1px solid #ddd; /* エリアの境界線（確認用） */
 }
 
+#closeButton {
+    padding: 20px 20px;
+    background-color: #176fa5;
+    color: white;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+#menuButton {
+    margin-right: 30px;
+    padding: 20px 20px;
+    background-color: #176fa5;
+    color: white;
+    cursor: pointer;
+    font-family: inherit
+}
+
+#checkAnswers {
+    align-items: center;
+    padding: 20px 20px;
+    background-color: #176fa5;
+    color: white;
+    cursor: pointer;
+    font-family: inherit;
+}
