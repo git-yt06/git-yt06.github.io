@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FizzBuzz問題</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="grid-container">
+            <h1>解答欄</h1>
+            <div id="grid" class="grid">
+                <div class="cell" data-index="0">-</div>
+                <div class="cell" data-index="1">-</div>
+                <div class="cell" data-index="2">-</div>
+                <div class="cell" data-index="3">-</div>
+                <div class="cell" data-index="4">-</div>
+                <div class="cell" data-index="5">-</div>
+                <div class="cell" data-index="6">-</div>
+                <div class="cell" data-index="7">-</div>
+                <div class="cell" data-index="8">-</div>
+                <div class="cell" data-index="9">-</div>
+            </div>
+        </div>
+        <div class="grid-container">
+            <h1>選択肢</h1>
+            <div id="options" class="grid">
+                <div class="option" data-value="3">num ← i X 10 + j;</div>
+                <div class="option" data-value="1">i を0から2まで1ずつ増やしながら</div>
+                <div class="option" data-value="7">を繰り返す(iの繰り返し)</div>
+                <div class="option" data-value="2">j を1から10まで1ずつ増やしながら</div>
+                <div class="option" data-value="8">を繰り返す(jの繰り返し)</div>
+                <div class="option" data-value="4">もし (num % 15 == 0) ならば <br>　|　{ ??? }<br>を実行し、そうでなければ</div>
+                <div class="option" data-value="9">を実行する</div>
+                <div class="option" data-value="10">もし (???) ならば <br>　|　{ ??? }<br></div>
+                <div class="option" data-value="5">もし (???) ならば <br>　|　{ ??? }<br> を実行し、そうでなければ</div>
+                <div class="option" data-value="9">を実行する</div>
+                <div class="option" data-value="6">もし (???) ならば <br>　|　{ 'bz 'を表示する; }<br>を実行し、そうでなければ <br>　|　{ numと' '(空白)を表示する }<br>を実行する</div>
+                
+                <div class="option" data-value="-1">(選択肢を外す用)</div>
+            </div>
+        </div>
+
+        <div class="resultArea" style="font-size:large">
+            <div id="quiz">
+                <div style="font-size: larger;font-weight: bolder;">問題</div>
+                ・numは1から順に1ずつ増やす(30まで)<br>
+                ・numが3の倍数のとき、"bz "を出力する<br>
+                ・numが5の倍数のとき、"fz "を出力する<br>
+                ・numが3かつ5の倍数のときは、"FB "を出力する<br>
+                ・numが他の数字のとき、num を出力する<br>
+                ・出力例：「..., 8, bz , fz, 11, bz, 13, 14, FB, 16, ...」<br>
+                ＊1つだけ使わない選択肢があります
+            </div>
+            <div class="button-container"><button id="checkAnswers"> 実行！ </button></div>
+            <div id="results">
+                <h2>実行結果:</h2>
+                <!--<pre id="modals"></pre>
+                <pre id="cells"></pre>
+                <pre id="code"></pre>-->
+                <pre id="executionResult"></pre>
+            </div>
+            <div id="commentArea">
+                <h2>フィードバック:</h2>
+                <div id="comment">2重ループが必要になって難しいな…頑張れ！</div>
+            </div>
+            <div class="button-container"><button id="menuButton">画像一覧</button><button id="closeButton"> ストーリーに戻る </button></div>
+        </div>
+    </div>
+
+    <div id="myModal1" class="modal">
+        <div class="modal-content">
+            <h2>選択肢を選んでください</h2>
+            <div class="modal-option" data-value="A">num % 3 = 0</div>
+            <div class="modal-option" data-value="B">num % 5 = 0</div>
+            <div class="modal-option" data-value="C">num % 3 ≠ 0</div>
+            <div class="modal-option" data-value="D">num % 5 ≠ 0</div>
+        </div>
+    </div>
+
+    <div id="myModal2" class="modal">
+        <div class="modal-content">
+            <h2>選択肢を選んでください</h2>
+            <div class="modal-option" data-value="A">"fz "を表示する</div>
+            <div class="modal-option" data-value="B">"bz "を表示する</div>
+            <div class="modal-option" data-value="C">"FB "を表示する</div>
+        </div>
+    </div>
+
+    <div id="myModal3" class="modal">
+        <div class="modal-content">
+            <h2>選択肢を選んでください</h2>
+            <div class="modal-option" data-value="A">num % 3 = 0, "fz "を表示する</div>
+            <div class="modal-option" data-value="B">num % 3 = 0, "FB "を表示する</div>
+            <div class="modal-option" data-value="C">num % 5 = 0, "fz "を表示する</div>
+            <div class="modal-option" data-value="D">num % 5 = 0, "FB "を表示する</div>
+        </div>
+    </div>
+    <script src="s.js"></script>
+</body>
+</html>
