@@ -86,7 +86,7 @@ function handleModalOptionClick(e, option) {
         text += splitValue[0].trim() + ") ならば <br>　|　{ " + splitValue[1].trim();
         if (ix == 6) {
             ix = 1;
-            text += " }<br> を実行する";
+            text += " }";
         }
         else text += " }<br> を実行し、そうでなければ";
     } else {
