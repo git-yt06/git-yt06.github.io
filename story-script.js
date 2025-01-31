@@ -842,7 +842,7 @@ const dialogues = [
     },
 ];
 
-let currentIndex = 90;
+let currentIndex = 0;
 let selectedChoices = [];
 
 function handleSubmitButton(index) {
