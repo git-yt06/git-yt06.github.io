@@ -230,7 +230,7 @@ const dialogues = [
     {
         character: "兄",
         text: `こういう使い方もできるぞ。<br>
-        ちなみに引数をもたないってのも可能だ。例えば、「こんちにわ」を表示するだけの関数<br>
+        ちなみに引数をもたないってのも可能だ。例えば、「こんちには」を表示するだけの関数<br>
         なら引数に応じて結果を変える必要がないから、こんちにわ() みたいに使えるぞ。
         `,
         choices: [], 
@@ -744,7 +744,7 @@ const dialogues = [
     {
         character: "兄",
         text: `そうだな。numの選択肢を間違えた(iとjが逆)結果、<br>
-        numが10,20,30,11...という風に動いているのが今回のミスだから、素直にここを直すか、<br>
+        numが10,20,30,40...という風に動いているのが今回のミスだから、素直にここを直すか、<br>
         もしくは繰り返し文のiとjも逆にする　ことで求められた動きになるな。<br>
         条件分岐の所はイメージ通り正しくプログラミングできているから、表示文も適切な回数反応しているぞ。`,
         choices: [],
@@ -753,15 +753,13 @@ const dialogues = [
     {
         character: "弟",
         text: `さっきの並び替え問題だと難しかったけど、教材のときは穴埋めだけだったから<br>
-        答えられて良かったな。どっかの問題でこういう風にnumを書いていた記憶があったから<br>
-        今回もそれだと思って検証せずに答えちゃった。悔しい。`,
+        答えられて良かったな。悔しい。`,
         choices: [],
         contentImageSrc: "./image/間違い2.JPG",
     },
     {
         character: "兄",
-        text: `似た表現だからって反射的に使うのは危ないぞ。<br>
-        テストのときは絶対検証した方が良いぞ。ケアレスミスはもったいないからな。<br><br>
+        text: `テストのときはどう動くか自分で検証した方が良いぞ。ケアレスミスはもったいないからな。<br><br>
         じゃあ、最後の問題だ。`,
         choices: [],
         url: "./problem/pension/q.html"
@@ -794,7 +792,7 @@ const dialogues = [
     {
         character: "兄",
         text: `enの方は*0.97がなくて焦ったんだろうが、<br>
-        ÷1.03と*0.97は等価でないからな。引掛け問題だな。<br>
+        ÷1.03と*0.97は微妙に等価でないからな。引掛け問題だな。<br>
         ちなみに、なんで0.97*enでなく、<br>
         en*97÷100とか、en-en*3÷100 [=en(1-0.03)=en*0.97]<br>
         とかって表現しているか分かるか？`,
@@ -844,7 +842,7 @@ const dialogues = [
     },
 ];
 
-let currentIndex = 0;
+let currentIndex = 90;
 let selectedChoices = [];
 
 function handleSubmitButton(index) {
@@ -952,8 +950,10 @@ function handleSubmitButton(index) {
         }
 
         if (ans == "") { com.innerHTML = "<br>違うな。選択肢に正解は1つはあるぞ。"; }
-        else if (ans == "1") { com.innerHTML = "<br>惜しいな。他にも正解があるぞ。"; }
-        else if (ans == "4") { com.innerHTML = "<br>惜しいな。他にも正解があるぞ。"; }
+        else if (ans == "1") { com.innerHTML = "<br>惜しいな。確かにnumの挙動はおかしくなるのがこれの間違えだ。ただ、他の選択肢も確認してみよう。"; }
+        else if (ans == "2") { com.innerHTML = "<br>違うな。条件分岐の仕方は正しいから、表示文の回数は正しいぞ。"; }
+        else if (ans == "3") { com.innerHTML = "<br>違うな。条件分岐の仕方は正しいから、numに応じた正しい出力はできているぞ。"; }
+        else if (ans == "4") { com.innerHTML = "<br>惜しいな。確かに繰り返し構文の方のiとjも逆にしちゃえば挙動は正しくなる。ただ、他の選択肢も確認してみよう"; }
         else if (ans == "14"){
             com.innerHTML = `<br>正解！(ストーリーを進めよう)`;
             document.getElementById('next').disabled = false;
@@ -1060,13 +1060,20 @@ function updateDialogue(index) {
 }
 
 document.getElementById('next').addEventListener('click', () => {
-    if (currentIndex < dialogues.length - 1) {
+    if (currentIndex < dialogues.length - 2) {
         currentIndex++;
         updateDialogue(currentIndex);
         selectedChoices = []; // 選択状態をリセット
         if (dialogues[currentIndex].id) document.getElementById('comment').innerHTML = "<br>(ここに選択結果に応じたコメントが出ます。分からない場合は参考にしてください)";
         else document.getElementById('comment').innerHTML = "";
     }
+    else {
+        if (currentIndex == dialogues.length - 2) currentIndex++;
+        updateDialogue(currentIndex);
+        selectedChoices = []; // 選択状態をリセット
+        document.getElementById('comment').innerHTML = "";
+        document.getElementById('next').disabled = true;
+}
 });
 
 document.getElementById('prev').addEventListener('click', () => {
@@ -1085,3 +1092,4 @@ document.getElementById('menu').addEventListener('click', () => {
 
 // 初期ダイアログの設定
 updateDialogue(currentIndex);
+
